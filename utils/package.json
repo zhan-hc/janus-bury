@@ -1,0 +1,28 @@
+{
+  "name": "janus-bury",
+  "version": "1.0.1",
+  "description": "支持vue3的埋点自动上报的插件",
+  "scripts": {
+    "build": "vite build"
+  },
+  "main": "dist/index.mjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": ["report", "bury", "janus"],
+  "author": "hc-zhan",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "fingerprintjs2": "^2.1.4",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "vite": "^6.0.3",
+    "vite-plugin-dts": "^4.3.0"
+  }
+}

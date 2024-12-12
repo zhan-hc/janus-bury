@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "declaration": true,             // 生成 .d.ts 文件
+    "declarationDir": "./dist/types", // 声明文件的输出目录
+    "module": "ESNext",              // 使用 ES 模块系统
+    "target": "ESNext",              // 使用 ESNext 作为目标版本
+    "moduleResolution": "node",      // 使用 Node.js 模块解析方式
+    "strict": true,                  // 启用严格模式
+    "esModuleInterop": true,         // 允许默认导入非 ES 模块
+    "jsx": "preserve",               // 保留 JSX 格式 (如果适用)
+    "skipLibCheck": true             // 跳过库文件的类型检查（提高构建速度）
+  },
+  "include": [
+    "packages/**/*.ts"  // 包含所有 TypeScript 文件（根据你的项目结构调整路径）
+  ],
+  "exclude": [
+    "node_modules"  // 排除 node_modules
+  ]
+}
