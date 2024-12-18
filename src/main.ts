@@ -1,7 +1,8 @@
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
-import buryPlugin from '../utils/dist'
+import buryPlugin from 'janus-bury'
+// import buryPlugin from '../utils/dist'
 import router from './router'
 const beforeMount = async () => {
   const app = createApp(App)

@@ -1,3 +1,6 @@
+/**
+ * 页面路由监听 和白屏
+ */
 import { Router } from 'vue-router'
 import { DataSenderMethodMap } from './types'
 // 页面埋点
@@ -41,7 +44,7 @@ export const pageReport = (router: Router, callback: (params: { funcName: keyof 
 }
 
 // 白屏检测
-export function getWhitescreen (callback: ({}: { status: string }) => void,  { skeletonProject, whiteBoxElements} = { skeletonProject: false, whiteBoxElements: ['html', 'body', '#app', '#root'] }) {
+export function getWhitescreen (callback: (data: any) => void,  { skeletonProject, whiteBoxElements} = { skeletonProject: false, whiteBoxElements: ['html', 'body', '#app', '#root'] }) {
   let _whiteLoopNum = 0;
   let _skeletonInitList: any[] = []; // 存储初次采样点
   let _skeletonNowList: any[]= []; // 存储当前采样点
@@ -100,8 +103,9 @@ function sampling() {
       // 比较前后dom是否一致
       if (_skeletonNowList.join() == _skeletonInitList.join())
         return callback({
-          status: 'error'
+          event_type: 'whiteScreen'
         });
+        
     }
     if (window._loopTimer) {
       clearTimeout(window._loopTimer);
@@ -114,9 +118,11 @@ function sampling() {
     }
   }
   // 17个点都是容器节点算作白屏
-  callback({
-    status: emptyPoints == 17 ? 'error' : 'ok',
-  });
+  if (emptyPoints === 17) {
+    callback({
+      event_type: 'whiteScreen'
+    });
+  }
 }
 
   if (document.readyState === 'complete') {

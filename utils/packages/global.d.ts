@@ -3,4 +3,6 @@ declare interface Window {
 }
 declare module 'fingerprintjs2';
 
-
+declare interface XMLHttpRequest {
+  _customParams: any
+}

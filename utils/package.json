@@ -1,6 +1,6 @@
 {
   "name": "janus-bury",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "支持vue3的埋点自动上报的插件",
   "scripts": {
     "build": "vite build"
@@ -11,7 +11,13 @@
   "files": [
     "dist"
   ],
-  "keywords": ["report", "bury", "janus"],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.umd.js"
+    }
+  },
+  "keywords": ["report", "bury", "janus", "monitor"],
   "author": "hc-zhan",
   "license": "ISC",
   "dependencies": {

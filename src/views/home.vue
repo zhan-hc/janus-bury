@@ -1,75 +1,62 @@
 <template>
-  home
-  <div @click="onclick">button => about</div>
-  <img src="https://file.iviewui.com/view-design-logo.png" alt="">
-  <div class="md">
-    <div class="md-left">
-      <div class="md-amount">20000000</div>
-      <div class="md-desc">
-        <span>第三方第三方</span>
-        <svg width="12.5" height="16">
-          <line x1="6" y1="2" x2="6" y2="14" stroke="#AAA" stroke-width="0.5"></line>
-        </svg>
-        <span>发的刚发的好久</span>
-      </div>
-    </div>
+<div class="wrap">
+    <h2>home 页面</h2>
+    <button @click="onclick">页面跳转 button => about</button>
+    <button @click="sendBury">埋点插件埋点上报</button>
+    <button @click="handleReq">xhr接口请求</button>
+    <button @click="handleFetch">fetch接口请求</button>
+    <button @click="handlePromiseReject">promise reject</button>
   </div>
+  
 </template>
 
 <script lang='ts' setup>
 import {useRouter} from 'vue-router'
+import { useBury } from 'janus-bury'
 // import { useBury } from '../../utils/dist'
+import axios from 'axios'
 const router = useRouter();
-// const { dataSender } = useBury()
-// console.log(dataSender.value, 'yyyyyyyyyyyyyyyyyyy')
+const { dataSender } = useBury()
 const onclick = () => {
-  dataSender.value.track('按钮点击')
-  dataSender.value.track('页面浏览', 'view')
   router.push('/about')
 }
+const sendBury = () => {
+  dataSender.value.track('按钮点击')
+  dataSender.value.track('页面浏览', 'view')
+}
+
+const handleReq = () => {
+  axios.post('https://www.baidu.com', { name: 'janus-bury' }).then(res => {
+    console.log(res)
+  })
+
+  axios.get('https://api.github.com/repos').then(res => {
+    console.log(res)
+  })
+}
+
+const handleFetch = () => {
+  // fetch('https://www.baidu.com').then((res) => res.text())
+  fetch('https://api.github.com/repos').then((res) => res.text())
+}
+
+const handlePromiseReject = () => {
+  Promise.reject('我抛出异常了')
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject('promise reject')
+    }, 1000)
+  })
+}
+
+
 </script>
 
 <style scoped>
-  .md{
-        display: flex;
-        align-items: center;
-        margin-top: 12px;
+  .wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-    .md-left {
-      flex: 1;
-    }
-    .md-amount {
-      font-size: 24px;
-      font-weight: 700;
-      font-family: 'Sui-Number-Bold';
-      color: #222226;
-    }
-    .md-desc {
-      z-index: 1;
-      position: relative;
-      display: flex;
-      align-items: center;
-      margin-top: 8px;
-      height: 22px;
-      color: #808080;
-      font-size: 11px;
-      font-weight: 400;
-      line-height: 16px;
-    }
-    .md-btn {
-      display: inline-flex;
-      height: 32px;
-      margin-right: 12px;
-      padding: 6px 12px;
-      justify-content: center;
-      align-items: center;
-      color: #FFF;
-      border-radius: 30px;
-      background: linear-gradient(95deg, #FF8A00 -4.31%, #FF3D00 98.72%);
-      font-size: 12px;
-      font-weight: 500;
-      line-height: 17px;
-      box-sizing: border-box;
-    }
       
 </style>

@@ -1,10 +1,11 @@
 import { App } from "vue";
 import {  defaultOption, initDataSender } from "./bury";
-import { getWhitescreen, pageReport } from './page'
-import { reportError } from './error'
-import { OptionType, Plugin } from "./types";
-import { getDeviceId } from "./common";
-import useBury from './hook'
+import { getWhitescreen, pageReport } from './utils/page'
+import { errorReport, rejectReport } from './utils/error'
+import { OptionType, Plugin } from "./utils/types";
+import { getDeviceId } from "./utils/common";
+import useBuryHook from './hook'
+import { requestReport } from "./utils/request";
 
 const plugin: Plugin<OptionType> = {
   install (app: App, options: OptionType) {
@@ -19,25 +20,25 @@ const plugin: Plugin<OptionType> = {
       })
     }
     if (options.monitorWhiteScreen !== false) {
-      getWhitescreen(({ status }) => {
-        status === 'error' && dataSender.track({
-          type: 'monitorWhiteScreen',
-          event_type: 'whiteScreen'
-        })
+      getWhitescreen((data) => {
+        dataSender.track(data)
       })
     }
 
     if (options.monitorError !== false) {
-      reportError((errEvent) => {
-        dataSender.track({
-          event_type: 'error',
-          event_msg: JSON.stringify({
-            msg: errEvent.message,
-            file:  errEvent.filename,
-            lineno:  errEvent.lineno,
-            colno:  errEvent.colno
-          })
-        })
+      errorReport((data) => {
+        dataSender.track(data)
+      })
+    }
+
+    if (options.monitorRequest !== false) {
+      requestReport((data) => {
+        dataSender.track(data)
+      })
+    }
+    if (options.monitorReject !== false) {
+      rejectReport(() => {
+        
       })
     }
     // 生成浏览器指纹
@@ -50,6 +51,4 @@ const plugin: Plugin<OptionType> = {
 
 export default plugin
 
-export {
-  useBury
-}
+export const useBury = useBuryHook

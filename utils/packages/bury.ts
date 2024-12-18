@@ -1,6 +1,6 @@
-import { sendBeacon, sendImage, ajax  } from "./sendType"
-import { addQuery } from './common'
-import { OptionType, ReportInterceptor } from './types'
+import { sendBeacon, sendImage, ajax  } from "./utils/sendType"
+import { addQuery } from './utils/common'
+import { OptionType, ReportInterceptor } from './utils/types'
 let dataSenderInstance: DataSender | undefined;
 
 export const defaultOption: OptionType = {

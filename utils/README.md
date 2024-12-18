@@ -1,5 +1,7 @@
 
-这是一个支持vue的前端监控SDK，可以收集并上报：代码错误，白屏，页面访问时间，用户行为等数据。
+<img style="margin: 20px auto;display: block;" src="https://github.com/zhan-hc/image/blob/main/blog/janus-bury/cover.png?raw=true" width="150" height="150" alt="janus-bury" />
+
+**janus-bury** 是一个支持vue的前端监控SDK，可以收集并上报：代码错误，白屏，页面访问时间，用户行为等数据。
 
 
 ## 安装
@@ -26,6 +28,7 @@ app.mount('#app')
 
 ## 配置
 
+### 常规配置项
 Name     | Type| Default| Description
 -------- | -----| -----| -----
 appName  | string| 必填| 上报的项目数据（区分上报数据来源）
@@ -33,13 +36,19 @@ appCode  | string| ''| 项目code
 appVersion|  string| ''| 项目版本
 server_url|  string| 必填| 数据上报的接口地址
 send_type|  beacon/ajax/img| beacon| 接口上报的方式
-method|  post/get| post| 接口上报的方法
-monitorRouter|  boolean| true| 是否开启页面路由监听
-monitorWhiteScreen|  boolean| true| 是否开启白屏监听
-monitorError|  boolean| true| 是否开启error监听
 userId|  string| ''| 用户id
 ext|  object| {}| 额外需要上报的数据
+method|  post/get| post| 接口上报的方法
 reportInterceptor|  function(reportData)| - | 上报数据前拦截器可以修改上报的数据
+
+### 监控配置项
+Name     | Type| Default| Description | event_type
+-------- | -----| -----| -----| -----
+monitorRouter|  boolean| true| 是否开启页面路由监听 | view/leave
+monitorWhiteScreen|  boolean| true| 是否开启白屏监听 | whiteScreen
+monitorError|  boolean| true| 是否开启error监听 | error
+monitorRequest|  boolean| true| 是否开启接口请求监听 | reqError
+monitorReject|  boolean| true| 是否开启Promise的reject监听 | rejectError
 
 
 ### reportInterceptor 上报前拦截器

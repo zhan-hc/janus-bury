@@ -1,4 +1,4 @@
-import { DataSender } from './bury'
+import { DataSender } from '../bury'
 
 export type Plugin<T> = {
   install(app: any, options: T): void;
@@ -18,6 +18,8 @@ export interface OptionType {
   monitorRouter?: boolean,
   monitorWhiteScreen?: boolean,
   monitorError?: boolean,
+  monitorRequest?: boolean,
+  monitorReject?: boolean,
   reportInterceptor?: ReportInterceptor
 
 }

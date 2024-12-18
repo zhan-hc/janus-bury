@@ -50,3 +50,21 @@ export const getDeviceId = async (): Promise<string> => {
     
   })
 }
+
+/**
+ * 获取fetch方法请求地址
+ * @param input 
+ * @returns 
+ */
+export const getFetchUrl = (input: RequestInfo | URL) => {
+  switch(Object.prototype.toString.call(input)) {
+    case '[object String]':
+      return input;
+    case '[object Request]':
+      return (input as Request).url;
+    case '[object URL]':
+      return (input as URL).href;
+    default:
+      return ''
+  }
+}
