@@ -1,6 +1,6 @@
 {
   "name": "janus-bury",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "支持vue3的埋点自动上报的插件",
   "scripts": {
     "build": "vite build"
