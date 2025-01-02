@@ -119,7 +119,7 @@ export class DataSender {
     if (this.reportInterceptor) {
       sendData = this.reportInterceptor(sendData) || sendData
     }
-    console.log('track data => ', sendData)
+    import.meta.env.MODE !== 'production' && console.log('track data => ', sendData)
     this.send(sendData)
   }
 

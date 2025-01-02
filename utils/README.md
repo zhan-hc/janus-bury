@@ -46,10 +46,23 @@ Name     | Type| Default| Description | event_type
 -------- | -----| -----| -----| -----
 monitorRouter|  boolean| true| 是否开启页面路由监听 | view/leave
 monitorWhiteScreen|  boolean| true| 是否开启白屏监听 | whiteScreen
-monitorError|  boolean| true| 是否开启error监听 | error
+monitorError|  boolean| true| 是否开启error监听 | error(运行时错误)/resourceError(资源错误，例如img图片加载失败)
 monitorRequest|  boolean| true| 是否开启接口请求监听 | reqError
 monitorReject|  boolean| true| 是否开启Promise的reject监听 | rejectError
+monitorPerformance|  boolean| true| 是否开启性能监听 | monitorPerformance
 
+#### monitorWhiteScreen
+如果开启了白屏检测可以配置检测白屏的参数
+
+Name     | Type| Default| Description
+-------- | -----| -----| -----
+whiteScreenOptions|  object | {skeletonProject: false, whiteBoxElements: ['html', 'body', '#app', '#root']}| 白屏监听参数
+
+**skeletonProject**： 是否开启了骨架屏
+**whiteBoxElements**： 监听的元素，默认监听了html，body，#app，#root，如果页面有自定义的监听白屏的dom，可以自行添加
+
+#### monitorPerformance
+性能指标监控涉及 `FCP` `LCP` `FID` `CLS` `TTFB` `FSP` 这些指标的上报 
 
 ### reportInterceptor 上报前拦截器
 ```
@@ -76,6 +89,7 @@ app.use(buryPlugin, {
 
 ```
 若拦截器没有 return value 则默认上报插件的请求数据
+
 
 
 ## 方法

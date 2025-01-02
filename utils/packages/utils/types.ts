@@ -17,9 +17,14 @@ export interface OptionType {
   appVersion?: string,
   monitorRouter?: boolean,
   monitorWhiteScreen?: boolean,
+  whiteScreenOptions?: {
+    skeletonProject: boolean,
+    whiteBoxElements: string[]
+  }
   monitorError?: boolean,
   monitorRequest?: boolean,
   monitorReject?: boolean,
+  monitorPerformance?: boolean,
   reportInterceptor?: ReportInterceptor
 
 }
